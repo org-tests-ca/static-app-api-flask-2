@@ -1,0 +1,136 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Minha API Flask",
+    "version": "1.0",
+    "description": "Exemplo de uma API simples em Flask com endpoints GET, POST, DELETE e PUT."
+  },
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/items": {
+      "get": {
+        "summary": "Obter todos os itens",
+        "responses": {
+          "200": {
+            "description": "Lista de itens",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Item"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Adicionar um novo item",
+        "parameters": [
+          {
+            "name": "item",
+            "in": "body",
+            "description": "Dados do item",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item adicionado com sucesso"
+          }
+        }
+      }
+    },
+    "/items/{item_id}": {
+      "get": {
+        "summary": "Obter um item por ID",
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "description": "ID do item",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do item",
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualizar um item existente",
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "description": "ID do item",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "item",
+            "in": "body",
+            "description": "Dados atualizados do item",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item atualizado com sucesso"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Excluir um item por ID",
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "description": "ID do item",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item excluído com sucesso"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Item": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
